@@ -1,0 +1,33 @@
+﻿@model PagedPostViewModel
+
+<div class="post-list">
+    <div class="list-group list-group-flush">
+        @foreach (var post in Model.Posts)
+        {
+            <div class="list-group-item flex-column align-items-start">
+                <div class="@*d-flex w-100 justify-content-between*@">
+                    <h2 class="mb-1">
+                        <a href="@post.GetFullUrl()">@post.Title</a>
+                    </h2>
+                </div>
+
+                <div class="container-fluid mt-1 mb-1">
+                    <div class="row">
+                        @{
+                            <div class="mb-2 mt-1">@Html.Raw(MarkdownConverter.ToHtml(post.Excerpt))</div>
+                        }
+
+                    </div>
+                </div>
+
+                <small class="text-muted"><span title="@post.PublishTime.ToChinaTime().ToDateAndTime()">@post.PublishTime.ToRelativeTime()</span> &middot; @post.Category</small>
+            </div>
+        }
+    </div>
+    <cache vary-by="@($"{Model.Pagination.CurrentPage}_{Model.Pagination.TotalPages}_{Model.Url}")" enabled="true" expires-sliding="@TimeSpan.FromDays(1)">
+        <pagination pagination="@Model.Pagination" url="@Model.Url"></pagination>
+    </cache>
+    
+</div>
+
+

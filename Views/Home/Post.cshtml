@@ -1,0 +1,72 @@
+﻿@model BlogPost
+
+@Html.Raw(Model.AssetHtml)
+<article class="post">
+    <h2>
+        @Model.Title
+    </h2>
+    <div class="text-muted text-right size-smaller d-block d-lg-none">@Model.PublishTime.ToRelativeTime() &middot; @Model.VisitCount.ToThousandsPlace() 次访问</div>
+    <div class="mt-2 mb-4 post-content">
+        @if (!string.IsNullOrEmpty(Model.Declaimer))
+        {
+            <div class="alert alert-success">
+                <div>@Html.Raw(Model.Declaimer)</div>
+            </div>
+        }
+
+        @Html.Raw(Model.Content)
+
+        @if (Model.Reference != null && Model.Reference.Any())
+        {
+            <h3>
+                参考资源
+            </h3>
+            <ul>
+                @foreach (var item in Model.Reference)
+                {
+                    <li>
+                        @Html.Raw(item)
+                    </li>
+                }
+            </ul>
+        }
+
+    </div>
+</article>
+
+<input type="hidden" id="url" value="@Model.GetFullUrl()" />
+
+@section stickySidebar{
+    <div class="card mb-3" id="post_metadata">
+        <div class="card-body">
+            <div class="card-text">
+                <table>
+                    <tr>
+                        <td>访问</td>
+                        <td>@Model.VisitCount.ToThousandsPlace() 次</td>
+                    </tr>
+                    <tr>
+                        <td>创建</td>
+                        <td title="@Model.PublishTime.ToChinaTime().ToDateAndTime()">@Model.PublishTime.ToRelativeTime()</td>
+                    </tr>
+                    <tr>
+                        <td>更新</td>
+                        <td title="@Model.UpdateTime.ToChinaTime().ToDateAndTime()">@Model.UpdateTime.ToRelativeTime()</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">版权</div>
+        <div class="card-body">
+            <p>
+                <a href="https://creativecommons.org/licenses/by/4.0/deed.en">Attribution 4.0 International (CC BY 4.0)</a>
+            </p>
+            <p>
+                <a href="https://creativecommons.org/licenses/by/4.0/deed.zh">署名 4.0 国际 (CC BY 4.0)</a>
+            </p>
+        </div>
+    </div>
+}
