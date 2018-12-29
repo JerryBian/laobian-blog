@@ -9,6 +9,7 @@ Database free, and no important data except the source are stored at server mach
 
 ### License
 
+```markdown
 MIT License
 
 Copyright (c) 2018 Jerry Bian
@@ -30,3 +31,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
