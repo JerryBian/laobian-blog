@@ -1,6 +1,4 @@
-﻿@using Laobian.Common.Base
-@inject IPostRepository PostRepository
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
@@ -27,7 +25,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#da532c">
     <link rel="canonical" href="@ViewData["canonical"]">
     <link rel="license" href="https://creativecommons.org/licenses/by/4.0">
     <link rel="alternate" href="/rss" type="application/rss+xml" title="@AppSetting.Default.BlogName">
@@ -114,8 +112,8 @@
         <div class="container text-center pt-3 pb-2">
             <small>
                 &copy; @DateTime.UtcNow.ToChinaTime().Year - @AppSetting.Default.ChineseName
-                &middot; <span title="@SystemState.PublishedPosts.ToThousandsPlace() published posts.">@SystemState.PublishedPosts.ToThousandsPlace() POSTS</span>
-                &middot; <span title="@SystemState.VisitLogs.ToThousandsPlace() succeed visits + @SystemState.StatusLogs.ToThousandsPlace() failed visists.">@SystemState.TotalLogs.ToThousandsPlace() VISITS</span>
+                &middot; <span title="@SystemState.PublishedPostsCount.ToThousandsPlace() published posts.">@SystemState.PublishedPostsCount.ToThousandsPlace() POSTS</span>
+                &middot; <span title="@SystemState.VisitLogsCount.ToThousandsPlace() succeed visits + @SystemState.StatusLogsCount.ToThousandsPlace() failed visists.">@SystemState.TotalLogs.ToThousandsPlace() VISITS</span>
             </small>
         </div>
     </footer>

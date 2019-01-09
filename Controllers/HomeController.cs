@@ -86,7 +86,7 @@ namespace Laobian.Blog.Controllers
                     ManagingEditor = $"{AppSetting.Default.AdminEmail} ({AppSetting.Default.ChineseName})",
                     Ttl = 60,
                     LastBuildDate = DateTime.UtcNow,
-                    Description = "个人博客，记录技术心得以及生活感悟。"
+                    Description = AppSetting.Default.BlogDescription
                 }
             };
             foreach (var blogPost in publishedPosts)

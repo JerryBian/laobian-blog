@@ -37,13 +37,13 @@ namespace Laobian.Blog.Log
                     await ExecuteInternalAsync();
                 }
 
-                await Task.Delay(TimeSpan.FromMilliseconds(100), stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
             }
         }
 
         protected override string GetBaseContainerName()
         {
-            return PrivateBlobResolver.GetBlobName(BaseContainer, subFolder: "visit");
+            return PrivateBlobResolver.ComposeBlobName(BaseContainer, subFolders: "visit");
         }
 
         protected override async Task InitAsync()
@@ -77,7 +77,7 @@ namespace Laobian.Blog.Log
                 subName = $"{VisitLogCategory.Post}/{id}";
             }
 
-            return PrivateBlobResolver.GetBlobName($"{GetBaseContainerName()}", subFolder: subName);
+            return PrivateBlobResolver.ComposeBlobName($"{GetBaseContainerName()}", subFolders: subName);
         }
 
         private void SetPostsVisitCount()
@@ -87,7 +87,7 @@ namespace Laobian.Blog.Log
             foreach (var log in logs)
             {
                 if (PrivateBlobResolver.GetParent(log.Key) == 
-                    PrivateBlobResolver.GetBlobName(GetBaseContainerName(), subFolder: VisitLogCategory.Post.ToString()))
+                    PrivateBlobResolver.ComposeBlobName(GetBaseContainerName(), subFolders: VisitLogCategory.Post.ToString()))
                 {
                     var postId = PrivateBlobResolver.GetName(log.Key);
                     if (Guid.TryParse(postId, out var id))
@@ -97,7 +97,7 @@ namespace Laobian.Blog.Log
                 }
             }
 
-            SystemState.VisitLogs = logs.SelectMany(ls => ls.Value).Sum(s => s.Value);
+            SystemState.VisitLogsCount = logs.SelectMany(ls => ls.Value).Sum(s => s.Value);
         }
 
         private async Task ExecuteInternalAsync()

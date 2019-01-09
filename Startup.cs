@@ -68,8 +68,8 @@ namespace Laobian.Blog
                     ExceptionHandler = async context =>
                     {
                         var errorFeature = context.Features.Get<IExceptionHandlerFeature>();
-                        var message = $"URL: {context.Request.GetDisplayUrl()}, IP: {context.Connection.RemoteIpAddress}, Message: {errorFeature.Error.Message}";
-                        await emailService.EmitErrorAsync($"<p>{message}</p>", errorFeature.Error);
+                        var message = $"<p>URL: {context.Request.GetDisplayUrl()}</p> <p>IP: {context.Connection.RemoteIpAddress}</p> <p>Message: {errorFeature.Error.Message}</p>";
+                        await emailService.EmitErrorAsync($"<div>{message}</div>", errorFeature.Error);
                         context.Response.ContentType = "text/plain";
                         await context.Response.WriteAsync($"Something was wrong! Please contact {AppSetting.Default.AdminEmail}.");
                     }
@@ -78,20 +78,20 @@ namespace Laobian.Blog
                 applicationLifetime.ApplicationStarted.Register(async () =>
                 {
                     SystemState.StartupTime = DateTime.UtcNow;
-                    var msg = $"Blog is started at {SystemState.StartupTime.ToChinaTime().ToIso8601()}, server {Environment.MachineName}, user {Environment.UserName}.";
-                    await emailService.EmitHealthyAsync($"<p>{msg}</p>");
+                    const string msg = "Blog is started successfully.";
+                    await emailService.EmitStatusAsync($"<p>{msg}</p>");
                 });
 
                 applicationLifetime.ApplicationStopping.Register(async () =>
                 {
-                    var msg = $"Blog is stopping at {DateTime.UtcNow.ToChinaTime().ToIso8601()}";
-                    await emailService.EmitHealthyAsync($"<p>{msg}</p>");
+                    const string msg = "Blog is stopping...";
+                    await emailService.EmitStatusAsync($"<p>{msg}</p>");
                 });
 
                 applicationLifetime.ApplicationStopping.Register(async () =>
                 {
-                    var msg = $"Blog is stopped at {DateTime.UtcNow.ToChinaTime().ToIso8601()}";
-                    await emailService.EmitHealthyAsync($"<p>{msg}</p>");
+                    const string msg = "Blog is stopped successfully.";
+                    await emailService.EmitStatusAsync($"<p>{msg}</p>");
                 });
             }
 

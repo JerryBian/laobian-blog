@@ -78,7 +78,7 @@ namespace Laobian.Blog.Log
             foreach (var item in await _azureBlobClient.ListAsync(BlobContainer.Private, GetBaseContainerName()))
                 using (item.Stream)
                 {
-                    var logs = SerializeHelper.FromProtobuf<List<BlogLog>>(item.Stream);
+                    var logs = SerializeHelper.FromProtoBuf<List<BlogLog>>(item.Stream);
                     _storedLogs.AddOrUpdate(
                         PrivateBlobResolver.GetParent(item.BlobName),
                         key =>
@@ -105,7 +105,7 @@ namespace Laobian.Blog.Log
             {
                 foreach (var item in pair.Value.GroupBy(p => p.When.ToMonthLite()))
                 {
-                    var blobName = PrivateBlobResolver.GetBlobName(pair.Key, item.Key);
+                    var blobName = PrivateBlobResolver.ComposeBlobName(pair.Key, item.Key);
                     var storedLogs = await _azureBlobClient.DownloadAsync<List<BlogLog>>(
                                          BlobContainer.Private,
                                          blobName,
