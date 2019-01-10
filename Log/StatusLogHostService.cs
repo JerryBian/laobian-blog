@@ -71,6 +71,7 @@ namespace Laobian.Blog.Log
             var messages = new StringBuilder();
             foreach (var log in logs)
             {
+                messages.AppendFormat($"<p><small>STATUS: {log.Key}, COUNT: {log.Value.Count}</small></p>");
                 var rows = new StringBuilder();
                 foreach (var blogLog in log.Value.OrderByDescending(l => l.When))
                 {

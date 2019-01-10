@@ -135,15 +135,6 @@ pre, code {
     margin-bottom: 0.6rem;
 }
 
-.post img {
-    padding: .25rem;
-    background-color: transparent;
-    border: 1px solid #dee2e6;
-    border-radius: .1rem;
-    max-width: 100%;
-    height: auto;
-}
-
 .post figure {
     display: inline-block;
 }
@@ -177,6 +168,10 @@ pre, code {
     padding: 1px 5px;
 }
 
+.post code:not(.hljs) {
+    color: brown;
+}
+
 .post pre {
     margin-bottom: 1em;
     padding-bottom: 20px !ie7;
@@ -199,6 +194,6 @@ pre, code {
     padding-bottom: 2px;
 }
 
-    .post a{
-        border-bottom-style: dashed;
-    }
+.post a {
+    border-bottom-style: dashed;
+}
