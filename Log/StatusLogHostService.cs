@@ -75,7 +75,7 @@ namespace Laobian.Blog.Log
                 foreach (var blogLog in log.Value.OrderByDescending(l => l.When))
                 {
                     var columns = new StringBuilder();
-                    columns.AppendLine($"<details><summary>{PrivateBlobResolver.GetName(log.Key)}</summary><table><tbody>");
+                    columns.AppendLine($"<details open><summary>{PrivateBlobResolver.GetName(log.Key)}</summary><table><tbody>");
                     columns.AppendFormat("<tr><td>Full URL:</td><td>{0}</td></tr>", blogLog.FullUrl);
                     columns.AppendFormat("<tr><td>Remote IP:</td><td>{0}</td></tr>", blogLog.RemoteIp);
                     columns.AppendFormat("<tr><td>When:</td><td>{0}</td></tr>", blogLog.When.ToChinaTime().ToIso8601());
