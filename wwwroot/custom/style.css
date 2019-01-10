@@ -66,6 +66,9 @@ pre, code {
 
 .sticky-top {
     top: 1.1rem;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 1020;
 }
 
 .card {
