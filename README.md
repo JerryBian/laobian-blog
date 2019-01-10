@@ -9,7 +9,7 @@ Database free, and no important data except the source are stored at server mach
 
 ### License
 
-```markdown
+```
 MIT License
 
 Copyright (c) 2018 Jerry Bian
