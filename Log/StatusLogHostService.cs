@@ -53,6 +53,12 @@ namespace Laobian.Blog.Log
             }
         }
 
+        protected override async Task InitAsync()
+        {
+            await base.InitAsync();
+            SystemState.StatusLogsCount = GetStoredLogs().SelectMany(ls => ls.Value).Sum(s => s.Value);
+        }
+
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
             await InitAsync();
